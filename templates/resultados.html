@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Resultados de Consumo Energético</title>
+</head>
+<body>
+    <header>
+        <h1>Resumen de Consumo Energético</h1>
+    </header>
+    <section>
+        <p>El consumo total de energía es de {{ energy }} kWh.</p>
+        <!-- Muestra el gráfico generado por Matplotlib -->
+        <img src="{{ chart_url }}" alt="Gráfico de Consumo Energético">
+        <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
+        <a href="/" class="button">Inicio</a>
+    </section>
+</body>
+</html>
+

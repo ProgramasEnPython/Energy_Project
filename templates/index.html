@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Energía Renovable</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/styleindex.css">
+<body>
+    <script src="/static/jsindex.js"></script>
+    <header>
+        <h1>Dashboard de Energía Renovable</h1>
+    </header>
+    <main>
+        <section id="informacion">
+            <a href="{{ url_for('nosotros') }}" class="button" id="nosotros" title="¡Descubre más sobre nosotros!">Sobre Nosotros</a>
+            <a href="/consumo" class="button" id="consumo" title="Descubre cuánta energía consumen tus electrodomésticos y cómo puedes compensarlo con paneles solares.">Calcular Consumo</a>
+            <a href="{{ url_for('proveedores') }}" class="button" id="proveedores" title="Conoce a nuestros proveedores">Proveedores De Paneles</a>
+        </section>
+        <section id="resumen">
+            <h2>Resumen de Energía Renovable</h2>
+            <p>Información general sobre la producción y consumo de energía renovable.</p>
+        </section>
+        <section id="graficos">
+            <div class="grafico">
+                <h3>Producción por Fuente de Energía</h3>
+                <canvas id="graficoBarras"></canvas>
+            </div>
+            <div class="grafico">
+                <h3>Participación de Cada Tipo de Energía</h3>
+                <canvas id="graficoTorta"></canvas>
+            </div>
+            <div class="grafico">
+                <h3>Tendencia Histórica</h3>
+                <canvas id="graficoLineas"></canvas>
+            </div>
+        </section>
+        <section>
+    </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+
+
+
+
+
