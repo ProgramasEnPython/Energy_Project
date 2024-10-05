@@ -16,7 +16,8 @@ appliance_energy = {
     "refrigerador": 600,
     "televisor": 200,
     "lavadora": 300,
-    "microondas": 100
+    "microondas": 100,
+    "Computador": 300
 }
 
 """
