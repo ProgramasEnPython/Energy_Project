@@ -1,25 +1,106 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
 }
 
-header {
+#main-container {
+    position: relative; /* Para posicionar el fondo relativo al contenedor principal */
+    z-index: 0; /* Colocar el contenido por encima */
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 128, 0, 0.783);
+    animation: gradient 5s ease infinite; /* Animación del fondo */
+    z-index: -1; /* Mantener el fondo detrás del contenido */
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.solar-header {
+    background-image: url('https://www.genpower.es/wp-content/uploads/2022/10/paneles-solares.png.webp');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Asegúrate de centrar el contenido horizontalmente */
+    color: #fff;
+    position: relative;
+}
+
+.solar-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.header-container {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.logo {
+    width: 100px; /* Ajusta el tamaño del logo */
+    margin-bottom: 1rem; /* Espacio debajo del logo */
+}
+
+#informacion {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0; /* Espaciado superior e inferior */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: green;
+    font-weight: bold;
+    border: 2px solid green;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover,
+.button:focus {
     background-color: green;
     color: white;
-    padding: 1rem;
-    text-align: center;
+    outline: none;
 }
 
-main {
-    padding: 2rem;
-}
-
+/* Sección de resumen */
 #resumen {
     margin-bottom: 2rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 1rem;
+    border-radius: 8px; /* Bordes redondeados */
 }
 
+/* Sección de gráficos */
 #graficos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -27,71 +108,19 @@ main {
 }
 
 .grafico {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 300px; /* Ajusta la altura según sea necesario */
 }
 
 
-#nosotros {
-    display: inline-block;               /* Para que el enlace se comporte como un botón */
-    padding: 10px 20px;                 /* Espaciado interno */
-    background-color: white;            /* Color de fondo blanco */
-    color: green;                        /* Color de texto verde */
-    font-weight: bold;                   /* Texto en negrita */
-    border: 2px solid green;             /* Bordes verdes */
-    border-radius: 25px;                /* Bordes ovalados */
-    text-decoration: none;               /* Sin subrayado */
-    transition: background-color 0.3s, color 0.3s; /* Efecto de transición */
-    margin-left: 0;
-}
 
-/* Efecto al pasar el cursor */
-#nosotros:hover,
-#nosotros:focus {
-    background-color: green;             /* Cambia el fondo a verde */
-    color: white;                        /* Cambia el texto a blanco */
-    outline: none;                      /* Sin borde de enfoque */
-}
-
-#consumo {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: white;
-    color: green;
-    font-weight: bold;
-    border: 2px solid green;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-    margin-left: 0;
-}
-
-#consumo:hover,
-#consumo:focus {
-    background-color: green;
-    color: white;
-    outline: none;
-}
-
-#proveedores {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: white;
-    color: green;
-    font-weight: bold;
-    border: 2px solid green;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-    margin-left: 0;
-}
-
-#proveedores:hover,
-#proveedores:focus {
-    background-color: green;
-    color: white;
-    outline: none;
+/* Estilos para los gráficos */
+canvas {
+    max-width: 100%; /* Asegurar que los gráficos sean responsivos */
+    height: auto; /* Altura automática */
 }

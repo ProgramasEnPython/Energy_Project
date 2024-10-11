@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: [120, 150, 100],
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
             }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false // Permite que el gráfico ajuste su altura
         }
     });
 
@@ -23,6 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: [120, 150, 100],
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
             }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false // Permite que el gráfico ajuste su altura
         }
     });
 
@@ -38,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 borderColor: '#36A2EB',
                 fill: false
             }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false // Permite que el gráfico ajuste su altura
         }
     });
 });
+
