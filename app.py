@@ -11,14 +11,22 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# Diccionario con consumo energético estimado en kWh por electrodoméstico
+# Diccionario con consumo energético estimado en kWh por electrodoméstico por mes
 appliance_energy = {
-"refrigerador": 600,
-"televisor": 200,
-"lavadora": 300,
-"microondas": 100,
-"Computador": 300,
-"Lamparas": 200
+"refrigerador": 45,
+"televisor": 6,
+"lavadora": 7,
+"microondas": 4,
+"Computador": 10,
+"Lamparas": 15,
+"VIdeojuegos": 7,
+"Cafetera": 4,
+"Licuadora": 0.5,
+"Plancha de ropa": 15,
+"Plancha de pelo": 1.5,
+"Secador": 11,
+"Aspiradora": 1.5,
+"Sonido en casa": 6
 }
 
 """
