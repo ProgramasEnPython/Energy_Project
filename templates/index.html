@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
     <body>
-        <div class="background"></div> <!-- Fondo animado -->
-        <div id="main-container"> <!-- Contenedor principal -->
+        <div class="background"></div>
+        <div id="main-container">
             <header class="solar-header">
                 <div class="header-container">
                     <img src="https://st.depositphotos.com/1378583/4183/v/950/depositphotos_41834667-stock-illustration-solar-panel-logo.jpg" alt="Logo de Energías Renovables" class="logo">
@@ -19,9 +19,9 @@
             </header>
             <main>
                 <section id="informacion">
-                    <a href="../templates/s_nosotros.html" class="button" id="nosotros" title="¡Descubre más sobre nosotros!">Sobre Nosotros</a>
-                    <a href="../templates/consumo.html" class="button" id="consumo" title="Descubre cuánta energía consumen tus electrodomésticos y cómo puedes compensarlo con paneles solares.">Calcular Consumo</a>
-                    <a href="../templates/proveedores.html" class="button" id="proveedores" title="Conoce a nuestros proveedores">Proveedores De Paneles</a>
+                    <a href="{{ url_for('nosotros') }}" class="button" id="nosotros" title="¡Descubre más sobre nosotros!">Sobre Nosotros</a>
+                    <a href="/consumo" class="button" id="consumo" title="Descubre cuánta energía consumen tus electrodomésticos y cómo puedes compensarlo con paneles solares.">Calcular Consumo</a>
+                    <a href="{{ url_for('proveedores') }}" class="button" id="proveedores" title="Conoce a nuestros proveedores">Proveedores De Paneles</a>
                 </section>
                 <section id="resumen">
                     <h2>Resumen de Energía Renovable</h2>
