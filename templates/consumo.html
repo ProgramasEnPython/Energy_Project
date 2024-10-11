@@ -3,44 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo de Consumo Energético</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Dashboard de Consumo Energético</title>
+    <link rel="stylesheet" href="../static/consumo.css">
 </head>
 <body>
-    <h1>Cálculo de Consumo Energético</h1>
+    <!-- Fondo animado y Header -->
+    <div class="background"></div> <!-- Fondo animado -->
+    <div id="main-container"> <!-- Contenedor principal -->
 
-    <form method="POST" action="{{ url_for('calcular') }}">
-        <div id="appliance-fields">
-            <div class="appliance-field">
-                <select name="appliance[]" required>
-                    <option value="">Selecciona un electrodoméstico</option>
-                    <option value="refrigerador">Refrigerador</option>
-                    <option value="lavadora">Lavadora</option>
-                    <option value="microondas">Microondas</option>
-                    <option value="televisor">Televisor</option>
-                </select>
-                <input type="number" name="quantity[]" min="1" value="1" required placeholder="Cantidad">
-                <button type="button" class="remove-field">Eliminar</button>
+        <header class="solar-header">
+            <div class="header-container">
+                <img src="https://st.depositphotos.com/1378583/4183/v/950/depositphotos_41834667-stock-illustration-solar-panel-logo.jpg" alt="Logo de Energías Renovables" class="logo">
+                <h1>Dashboard de Energía Renovable</h1>
             </div>
-        </div>
-        <button type="button" id="add-field">Agregar otro electrodoméstico</button>
+        </header>
 
-        <div>
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="department">Departamento:</label>
-            <input type="text" id="department" name="department" required>
-        </div>
-        <div>
-            <label for="region">Región:</label>
-            <input type="text" id="region" name="region" required>
-        </div>
+        <!-- Formulario de cálculo de consumo energético -->
+        <section class="calculator">
+            <h2>Cálculo de Consumo Energético</h2>
+        
+            <form method="POST" action="{{ url_for('calcular') }}">
+                <div id="appliance-fields">
+                    <div class="appliance-field">
+                        <select name="appliance[]" required>
+                            <option value="">Selecciona un electrodoméstico</option>
+                            <option value="refrigerador">Refrigerador</option>
+                            <option value="televisor">Televisor</option>
+                            <option value="lavadora">Lavadora</option>
+                            <option value="microondas">Microondas</option>
+                            <option value="computador">Computador</option>
+                            <option value="lamparas">Lámparas</option>
+                            <option value="videojuegos">Videojuegos</option>
+                            <option value="cafetera">Cafetera</option>
+                            <option value="licuadora">Licuadora</option>
+                            <option value="plancha_de_ropa">Plancha de Ropa</option>
+                            <option value="plancha_de_pelo">Plancha de Pelo</option>
+                            <option value="secador">Secador</option>
+                            <option value="aspiradora">Aspiradora</option>
+                            <option value="sonido_en_casa">Sonido en Casa</option>
+                        </select>
+                        <input type="number" name="quantity[]" min="1" value="1" required placeholder="Cantidad">
+                        <button type="button" class="remove-field">Eliminar</button>
+                    </div>
+                </div>
+                <button type="button" id="add-field">Agregar otro electrodoméstico</button>
+        
+                <div>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="department">Departamento:</label>
+                    <input type="text" id="department" name="department" required value="Antioquia" readonly>
+                </div>
+                <div>
+                    <label for="region">Región:</label>
+                    <select id="region" name="region" required>
+                        <option value="">Selecciona una región</option>
+                        <option value="valle_de_aburra">Valle de Aburrá</option>
+                        <option value="oriente">Oriente</option>
+                        <option value="suroeste">Suroeste</option>
+                        <option value="norte_y_bajo_cauca">Norte y Bajo Cauca</option>
+                        <option value="uraba_y_ocidente">Urabá y Occidente</option>
+                        <option value="magdalena_medio">Magdalena Medio</option>
+                    </select>
+                </div>
+        
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+        
+        
 
-        <button type="submit">Calcular</button>
-    </form>
-
+    <!-- JavaScript para añadir/eliminar campos del formulario -->
     <script>
         document.getElementById('add-field').addEventListener('click', function() {
             var newField = document.createElement('div');
