@@ -1,0 +1,264 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Asegura que el body y html ocupen toda la ventana */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-container {
+    flex: 1; /* Esto asegura que el contenido principal ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    text-align: center;
+    color: white;
+}
+
+.footer-container {
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espaciado entre los íconos */
+}
+
+.socialContainer {
+    width: 40px; /* Ajusta el tamaño del ícono */
+    height: 40px; /* Ajusta el tamaño del ícono */
+}
+
+.socialSvg {
+    fill: white; /* Color de los íconos */
+    width: 100%; /* Asegúrate que los íconos ocupen el contenedor */
+    height: 100%; /* Asegúrate que los íconos ocupen el contenedor */
+}
+
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.solar-header {
+    padding: 20px;
+}
+
+.navigation {
+    display: none; /* Oculta el menú por defecto */
+    flex-direction: column; /* Muestra los enlaces en una columna */
+    align-items: center; /* Centra los enlaces */
+    margin-top: 10px; /* Espacio entre el botón y el menú */
+}
+
+.menu-button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    display: flex;
+    flex-direction: column; /* Alinear las rayas verticalmente */
+    margin: 20px; /* Espacio alrededor del botón */
+}
+
+.hamburger {
+    width: 30px; /* Ancho de las rayas */
+    height: 3px; /* Altura de las rayas */
+    background-color: white; /* Color de las rayas */
+    margin: 4px 0; /* Espacio entre las rayas */
+    transition: all 0.3s; /* Animación suave */
+}
+
+.menu-button:hover .hamburger {
+    background-color: #f0f0f0; /* Cambiar el color de las rayas al pasar el mouse */
+}
+
+.cta {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.cta-separado {
+    margin-bottom: 10px; /* Ajusta este valor según sea necesario */
+}
+
+.cta span {
+    padding-bottom: 7px;
+    letter-spacing: 4px;
+    font-size: 14px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+.cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active svg {
+    transform: scale(0.9);
+}
+
+.hover-underline-animation {
+    position: relative;
+    color: white;
+    padding-bottom: 50px;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.styled-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid #4f4f4f;
+    border-radius: 4px;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    font-size: 19px;
+    cursor: pointer;
+    color: rgb(6, 5, 5);
+    z-index: 1;
+}
+
+.styled-button:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(243, 236, 236, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.styled-button:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #0ce064;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.styled-button:hover {
+    color: #ffffff;
+    border: 1px solid #39bda7;
+}
+
+.styled-button:hover:before {
+    top: -35%;
+    background-color: #39bda7;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.styled-button:hover:after {
+    top: -45%;
+    background-color: #39bda7;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-top: 30px;
+    font-size: 2.5em;
+}
+
+h2 {
+    margin: 5px 0;
+    font-size: 1.5em;
+}
+
+main {
+    padding: 20px;
+}
+
+#resumen {
+    text-align: center;
+    
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados para un mejor aspecto */
+}
+
+#resumen p {
+    font-size: 1.2em; /* Aumentar el tamaño de la fuente */
+    line-height: 1.5; /* Mejorar el espacio entre líneas */
+    color: white; /* Asegúrate de que el texto sea blanco */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Sombra para mejorar la legibilidad */
+}
+
+/* Estilo para los enlaces de navegación */
+.nav-link {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    color: black; /* Color del texto */
+    font-size: 1.2em; /* Tamaño de fuente */
+    margin: 10px 0; /* Espacio entre enlaces */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    text-decoration: underline; /* Subrayado */
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #f0f0f0; /* Cambia color al pasar el mouse */
+}
+
+/* Clase activa para el enlace seleccionado */
+.active {
+    font-weight: bold; /* Resalta el enlace activo */
+}
