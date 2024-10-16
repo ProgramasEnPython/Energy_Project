@@ -1,0 +1,244 @@
+body {
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #4caf50;
+    }
+    
+    .solar-header {
+        background-image: url('https://www.genpower.es/wp-content/uploads/2022/10/paneles-solares.png.webp');
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        position: relative;
+    }
+    
+    .solar-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    
+    .header-container {
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+    
+    .provider-title {
+        text-align: center;
+        margin: 20px 0;
+        transition: color 0.3s ease; /* Transición para el cambio de color */
+    }
+    
+    .provider {
+        cursor: pointer; /* Cambiar cursor para indicar interactividad */
+        transition: transform 0.3s ease; /* Transición para el efecto de hover */
+    }
+    
+    .provider:hover {
+        transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+    }
+    
+}
+
+/* Header */
+.solar-header {
+    background-image: url('https://cdn.pixabay.com/photo/2024/03/26/11/57/solar-8656654_640.jpg'); /* Fondo de paneles solares */
+    background-size: cover; /* Asegura que la imagen cubra todo el header */
+    background-position: center; /* Centrar la imagen */
+    position: relative; /* Para los efectos de capa */
+    height: 300px; /* Altura del header */
+    display: flex; /* Usar flexbox para alinear el contenido */
+    align-items: center; /* Centrar verticalmente el contenido */
+    justify-content: center; /* Centrar horizontalmente el contenido */
+    color: #fff; /* Color de texto blanco */
+}
+
+/* Superposición semitransparente para mejorar la legibilidad del texto */
+.solar-header::before {
+    content: "";
+    position: absolute; /* Posicionar en el fondo */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
+    z-index: 1; /* Colocar por debajo del texto */
+}
+
+.header-container {
+    position: relative; /* Para colocar el texto por encima de la superposición */
+    text-align: center; /* Centrar texto */
+    z-index: 2; /* Colocar por encima de la superposición */
+}
+
+.logo {
+    width: 100px; /* Ajusta el tamaño del logo */
+    margin-bottom: 1rem; /* Espacio debajo del logo */
+}
+
+h1 {
+    font-size: 3rem; /* Tamaño grande para el título */
+    margin: 0; /* Sin margen */
+}
+
+p {
+    font-size: 1.2rem; /* Tamaño de fuente para el subtítulo */
+    margin-bottom: 1rem; /* Espacio debajo del párrafo */
+}
+
+/* Estilos del menú de navegación */
+nav {
+    margin-top: 1rem; /* Espacio superior para la navegación */
+}
+
+.nav-links {
+    list-style: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+    display: flex; /* Usar flexbox para el menú */
+    gap: 2rem; /* Espacio entre enlaces */
+}
+
+.nav-links li a {
+    text-decoration: none; /* Sin subrayado */
+    color: #ffe600; /* Color amarillo para enlaces */
+    font-size: 1.2rem; /* Tamaño de fuente para enlaces */
+    transition: color 0.3s, transform 0.3s; /* Transiciones suaves */
+}
+
+.nav-links li a:hover {
+    color: #ff9800; /* Color naranja al pasar el cursor */
+    transform: scale(1.1); /* Efecto de aumento al pasar el cursor */
+}
+
+/* Estilos para los encabezados */
+h2 {
+    font-size: 3rem; /* Tamaño de fuente grande */
+    color: #fff; /* Color blanco para encabezados */
+    margin-bottom: 1rem; /* Espacio debajo del encabezado */
+    text-align: center; /* Centrar el texto */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para el texto */
+}
+
+h3 {
+    font-size: 2rem; /* Tamaño de fuente medio */
+    color: #ffe600; /* Color amarillo para h3 */
+    margin: 1rem 0; /* Espacio arriba y abajo */
+}
+
+/* Efecto futurista para enlaces */
+h3 a {
+    text-decoration: none; /* Sin subrayado */
+    color:#366e3d; /* Color amarillo para enlaces */
+    transition: color 0.3s, transform 0.3s; /* Efecto de transición para el color */
+}
+
+/* Efecto al pasar el cursor sobre los enlaces de h3 */
+h3 a:hover {
+    color: #ff9800; /* Color naranja al pasar el cursor */
+    transform: scale(1.1); /* Aumenta el tamaño */
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+}
+
+/* Intro */
+.intro {
+    background-color:rgba(17, 181, 17, 0.333); /* Fondo negro semitransparente */
+    padding: 2rem;
+    border-radius: 10px; /* Bordes redondeados */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque de fondo */
+}
+
+/* Gráficos */
+#graficos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Estilo para gráficos */
+.grafico {
+    background-color: white; /* Fondo blanco para contraste */
+    padding: 1.5rem; /* Aumento del padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
+    transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transformación */
+}
+
+/* Efecto al pasar el cursor en gráficos */
+.grafico:hover {
+    transform: scale(1.05); /* Efecto de zoom */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+}
+
+/* Botones */
+.button-container {
+    text-align: center; /* Centrar el contenedor de botones */
+    margin-top: 2rem; /* Espacio arriba del botón */
+}
+
+.button {
+    display: inline-block; /* Para que los enlaces se comporten como botones */
+    padding: 10px 30px; /* Ajuste del padding */
+    background-color: #4caf50; /* Verde vibrante */
+    color: white; /* Texto blanco */
+    font-weight: bold;
+    border: none; /* Sin bordes */
+    border-radius: 25px; /* Bordes redondeados */
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+}
+
+/* Efecto al pasar el cursor sobre los botones */
+.button:hover {
+    background-color: #366e3d; /* Color más oscuro al pasar el cursor */
+    transform: translateY(-2px); /* Desplazamiento al pasar el cursor */
+}
+
+/* Footer */
+footer {
+    padding: 1rem 0; /* Espaciado vertical para el footer */
+    text-align: center; /* Centrar el texto */
+}
+
+.footer-container {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+    color: white; /* Color del texto */
+    padding: 1rem; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2.5rem; /* Disminuir el tamaño del encabezado h2 en pantallas más pequeñas */
+    }
+
+    h3 {
+        font-size: 1.5rem; /* Disminuir el tamaño del encabezado h3 en pantallas más pequeñas */
+    }
+
+    .grafico {
+        padding: 1rem; /* Reducir el padding en gráficos */
+    }
+
+    .button {
+        padding: 8px 20px; /* Ajustar el tamaño del botón */
+    }
+}
+
