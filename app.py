@@ -38,17 +38,25 @@ contenido del archivo index.html como respuesta.
 def index():
     return render_template('index.html')
 
-@app.route('/consumo')
+@app.route('/s_nosotros.html')
+def s_nosotros():
+    return render_template('s_nosotros.html')
+
+@app.route('/consumo.html')
 def consumo():
     return render_template('consumo.html')
 
-@app.route('/nosotros')
-def nosotros():
-    return render_template('s_nosotros.html')
-
-@app.route('/proveedores')
+@app.route('/proveedores.html')
 def proveedores():
     return render_template('proveedores.html')
+
+@app.route('/datosantioquia.html')
+def datosantioquia():
+    return render_template('datosantioquia.html')
+
+@app.route('/ayudas.html')
+def ayudas():
+    return render_template('ayudas.html')
 
 
 @app.route('/calcular', methods=['POST'])
