@@ -123,3 +123,20 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #45a049;
 }
+
+#volver_button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+#volver_button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+
