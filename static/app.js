@@ -1,17 +1,17 @@
-document.getElementById('energyForm').addEventListener('submit', function(event) {
+document.getElementById('energyForm').addEventListener('submit', function (event) {
     event.preventDefault();
-    
+
     const formData = new FormData(this);
-    
+
     fetch('/calcular', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.text())
-    .then(html => {
-        document.body.innerHTML = html;
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.text())
+        .then(html => {
+            document.body.innerHTML = html;
+        })
+        .catch(error => console.error('Error:', error));
 });
 
 

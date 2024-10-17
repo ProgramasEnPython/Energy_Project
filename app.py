@@ -13,20 +13,20 @@ app = Flask(__name__)
 
 # Diccionario con consumo energético estimado en kWh por electrodoméstico por mes
 appliance_energy = {
-"refrigerador": 45,
-"televisor": 6,
-"lavadora": 7,
-"microondas": 4,
-"Computador": 10,
-"Lamparas": 15,
-"VIdeojuegos": 7,
-"Cafetera": 4,
-"Licuadora": 0.5,
-"Plancha de ropa": 15,
-"Plancha de pelo": 1.5,
-"Secador": 11,
-"Aspiradora": 1.5,
-"Sonido en casa": 6
+    "refrigerador": 45,
+    "televisor": 6,
+    "lavadora": 7,
+    "microondas": 4,
+    "computador": 10,
+    "lamparas": 15,
+    "videojuegos": 7,
+    "cafetera": 4,
+    "licuadora": 0.5,
+    "plancha de ropa": 15,
+    "plancha de pelo": 1.5,
+    "secador": 11,
+    "aspiradora": 1.5,
+    "sonido en casa": 6
 }
 
 """
@@ -34,25 +34,32 @@ appliance_energy = {
 -Cuando un usuario visita esa ruta, se ejecuta la función index(), que renderiza y devuelve el 
 contenido del archivo index.html como respuesta.
 """
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/s_nosotros.html')
 def s_nosotros():
     return render_template('s_nosotros.html')
 
+
 @app.route('/consumo.html')
 def consumo():
     return render_template('consumo.html')
+
 
 @app.route('/proveedores.html')
 def proveedores():
     return render_template('proveedores.html')
 
+
 @app.route('/datosantioquia.html')
 def datosantioquia():
     return render_template('datosantioquia.html')
+
 
 @app.route('/ayudas.html')
 def ayudas():
@@ -61,37 +68,67 @@ def ayudas():
 
 @app.route('/calcular', methods=['POST'])
 def calcular():
-    appliances = request.form.getlist('appliance[]') #obtiene la lista de electrodomésticos seleccionados
-    quantities = request.form.getlist('quantity[]')  #obtiene la lista de cantidades correspondientes a cada electrodoméstico.
+    appliances = request.form.getlist('appliance[]')  # obtiene la lista de electrodomésticos seleccionados
+    quantities = request.form.getlist(
+        'quantity[]')  # obtiene la lista de cantidades correspondientes a cada electrodoméstico.
     email = request.form['email']
     department = request.form['department']
     region = request.form['region']
+    area_disponible = float(request.form.get('area_disponible'))
 
-    total_energy = 0        #Para almacenar el consumo total de energía
-    appliance_data = []     #Para almacenar la energía consumida por cada electrodoméstico.
+    total_energy = 0  # Para almacenar el consumo total de energía
+    appliance_data = []  # Para almacenar la energía consumida por cada electrodoméstico.
 
     # Procesar cada electrodoméstico
-    for appliance, quantity in zip(appliances, quantities): #Se itera sobre las listas de electrodomésticos y sus cantidades usando zip()
-        quantity = int(quantity)                            #Para cada electrodoméstico, se convierte la cantidad a un entero, se calcula su consumo energético llamando a la función calculate_energy(), y se acumula el consumo total en total_energy.
+    for appliance, quantity in zip(appliances,
+                                   quantities):  # Se itera sobre las listas de electrodomésticos y sus cantidades usando zip()
+        quantity = int(
+            quantity)  # Para cada electrodoméstico, se convierte la cantidad a un entero, se calcula su consumo energético llamando a la función calculate_energy(), y se acumula el consumo total en total_energy.
         energy = calculate_energy(appliance, quantity)
         total_energy += energy
-        appliance_data.append((appliance, energy))          #La información de cada electrodoméstico se agrega a la lista appliance_data
+        appliance_data.append(
+            (appliance, energy))  # La información de cada electrodoméstico se agrega a la lista appliance_data
 
-    filename = generate_chart(appliance_data)               #Se llama a la función generate_chart() para generar un gráfico basado en los datos de consumo de los electrodomésticos, y se almacena el nombre del archivo generado.
+    filename = generate_chart(
+        appliance_data)  # Se llama a la función generate_chart() para generar un gráfico basado en los datos de consumo de los electrodomésticos, y se almacena el nombre del archivo generado.
 
-    chart_url = url_for('output_file', filename=filename) #Se utiliza url_for() para crear una URL que apunta a la ruta que servirá el gráfico generado. Esto permite que la plantilla resultados.html acceda a la imagen.
+    chart_url = url_for('output_file',
+                        filename=filename)  # Se utiliza url_for() para crear una URL que apunta a la ruta que servirá el gráfico generado. Esto permite que la plantilla resultados.html acceda a la imagen.
 
-    send_email(email, appliance_data, total_energy, department, region)  #Se llama a la función send_email() para enviar un correo electrónico con los resultados del consumo energético y la información adicional.
+    send_email(email, appliance_data, total_energy, department,
+               region)  # Se llama a la función send_email() para enviar un correo electrónico con los resultados del consumo energético y la información adicional.
+
+    #    Cálculo de paneles solares
+    # Parámetros para los paneles solares
+    potencia_panel = 0.550  # Potencia en kW (550 W)
+    horas_exposicion = 6  # Horas promedio de exposición diaria en Antioquia
+    rendimiento = 1.25  # Factor de rendimiento
+    area_panel = 2.2  # Área de un panel solar (m²)
+
+    # Calcular consumo diario
+    consumo_diario = total_energy / 30
+
+    # Calcular el número de paneles necesarios
+    paneles_necesarios = consumo_diario / (potencia_panel * horas_exposicion * rendimiento)
+
+    # Calcular el área total necesaria para los paneles
+    area_total = paneles_necesarios * area_panel
 
     """ Finalmente, se renderiza la plantilla resultados.html, pasando el consumo total de energía, la lista
         de datos de electrodomésticos y la URL del gráfico como parámetros. Esto permite que la plantilla 
         muestre los resultados al usuario."""
-    return render_template('resultados.html', total_energy=total_energy, appliance_data=appliance_data, chart_url=chart_url)
+    return render_template('resultados.html', total_energy=total_energy, appliance_data=appliance_data,
+                           chart_url=chart_url,
+                           paneles_necesarios=paneles_necesarios,
+                           area_total=area_total,
+                           area_disponible=area_disponible
+                           )
 
 
 def calculate_energy(appliance, quantity):
     """Calcula el consumo energético en kWh basado en el electrodoméstico y su cantidad."""
     return appliance_energy.get(appliance, 0) * quantity
+
 
 def send_email(to_email, appliance_data, total_energy, department, region):
     """Envía un correo electrónico con el resultado del consumo energético."""
@@ -114,15 +151,15 @@ def send_email(to_email, appliance_data, total_energy, department, region):
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        #Crea una instancia del objeto SMTP que se conecta al servidor SMTP de Gmail en el puerto 587,
-        #que es el puerto utilizado para la comunicación segura a través de TLS (Transport Layer Security)
+        # Crea una instancia del objeto SMTP que se conecta al servidor SMTP de Gmail en el puerto 587,
+        # que es el puerto utilizado para la comunicación segura a través de TLS (Transport Layer Security)
         server = smtplib.SMTP('smtp.gmail.com', 587)
-        #Inicia la conexión segura utilizando el protocolo TLS. Esto cifra la comunicación entre el cliente y el servidor
+        # Inicia la conexión segura utilizando el protocolo TLS. Esto cifra la comunicación entre el cliente y el servidor
         server.starttls()
-        #Inicia sesión en el servidor SMTP utilizando las credenciales proporcionadas
+        # Inicia sesión en el servidor SMTP utilizando las credenciales proporcionadas
         server.login(from_email, from_password)
         server.sendmail(from_email, to_email, msg.as_string())
-        #Cierra la conexión con el servidor SMTP.
+        # Cierra la conexión con el servidor SMTP.
         server.quit()
         print("Correo enviado exitosamente!")
     except Exception as e:
@@ -133,6 +170,8 @@ def send_email(to_email, appliance_data, total_energy, department, region):
 La función generate_chart() toma un argumento appliance_data, que es una lista de tuplas. 
 Cada tupla contiene el nombre de un electrodoméstico y su correspondiente consumo de energía.
 """
+
+
 def generate_chart(appliance_data):
     """
     Aquí se utilizan comprensiones de listas para extraer los nombres de los electrodomésticos y sus
@@ -151,7 +190,7 @@ def generate_chart(appliance_data):
     plt.figure(figsize=(8, 6))
     bars = plt.bar(appliances, energies, color='#3498db', edgecolor='black', linewidth=1.5)
 
-    #Se añaden etiquetas a los ejes X e Y y un título al gráfico, con tamaños de fuente específicos.
+    # Se añaden etiquetas a los ejes X e Y y un título al gráfico, con tamaños de fuente específicos.
     plt.xlabel('Electrodoméstico', fontsize=14)
     plt.ylabel('Consumo en kWh', fontsize=14)
     plt.title('Consumo Energético', fontsize=16, fontweight='bold')
@@ -165,18 +204,17 @@ def generate_chart(appliance_data):
         plt.text(bar.get_x() + bar.get_width() / 2, yval, f'{yval:.0f} kWh', va='bottom', ha='center', fontsize=14,
                  color='black')
 
-    #Se establece el límite superior del eje Y para que sea un 20% mayor que el consumo máximo,
+    # Se establece el límite superior del eje Y para que sea un 20% mayor que el consumo máximo,
     # lo que proporciona un espacio adicional en la parte superior del gráfico.
     plt.ylim(0, max(energies) * 1.2)
-    #Se añade una cuadrícula horizontal al gráfico para facilitar la lectura de los valores.
+    # Se añade una cuadrícula horizontal al gráfico para facilitar la lectura de los valores.
     plt.grid(axis='y', linestyle='--', alpha=0.7)
 
-
-    #Si no existe el directorio output, se crea.
-    #Se define el nombre del archivo para guardar el gráfico.
-    #Se utiliza plt.savefig() para guardar el gráfico en un archivo con una resolución de 300 dpi y
-    #ajustando los márgenes.
-    #Después de guardar el gráfico, se cierra la figura con plt.close() para liberar memoria.
+    # Si no existe el directorio output, se crea.
+    # Se define el nombre del archivo para guardar el gráfico.
+    # Se utiliza plt.savefig() para guardar el gráfico en un archivo con una resolución de 300 dpi y
+    # ajustando los márgenes.
+    # Después de guardar el gráfico, se cierra la figura con plt.close() para liberar memoria.
     if not os.path.exists('output'):
         os.makedirs('output')
 
@@ -190,6 +228,7 @@ def generate_chart(appliance_data):
 
     return filename
 
+
 """
 La función output_file() es responsable de manejar las solicitudes para acceder a archivos de imagen que 
 han sido generados por la aplicación. Cuando un usuario solicita una imagen a través de 
@@ -197,19 +236,23 @@ la URL /output/<filename>, la función toma el nombre del archivo y lo envía al
 su visualización. Esto es útil para mostrar gráficos generados por Matplotlib en una página web, permitiendo 
 que se integren fácilmente en las plantillas HTML.
 """
+
+
 @app.route('/output/<filename>')
 def output_file(filename):
     return send_file(os.path.join('output', filename))
 
-#Función para borrar el directorio 'output'
+
+# Función para borrar el directorio 'output'
 def clean_output_directory():
     if os.path.exists('output'):
         shutil.rmtree('output')
         print("El directorio 'output' ha sido eliminado.")
 
-#Registrar la función para que se ejecute al cerrar la app
+
+# Registrar la función para que se ejecute al cerrar la app
 atexit.register(clean_output_directory)
 
-#Inicia la aplicación Flask
+# Inicia la aplicación Flask
 if __name__ == '__main__':
     app.run(debug=True)

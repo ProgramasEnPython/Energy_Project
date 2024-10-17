@@ -20,7 +20,7 @@ function toggleMenu() {
     }
 }
 
-document.getElementById("contact-button").addEventListener("click", function() {
+document.getElementById("contact-button").addEventListener("click", function () {
     toggleMenu(); // Mostrar el menú si está oculto
     const contactButton = document.querySelector("nav #nav-menu .button:nth-child(6)"); // Selecciona el botón "Contáctenos"
     contactButton.click(); // Simula un clic en el botón "Contáctenos"

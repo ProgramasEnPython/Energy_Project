@@ -6,18 +6,36 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/static/styles.css">
     <title>Resultados de Consumo Energético</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <h1>Resumen de Consumo Energético</h1>
-    </header>
-    <section>
-        <p>El consumo total de energía es de {{ energy }} kWh.</p>
-        <!-- Muestra el gráfico generado por Matplotlib -->
-        <img src="{{ chart_url }}" alt="Gráfico de Consumo Energético">
-        <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
-        <a href="/" class="button">Inicio</a>
-    </section>
+<header>
+    <h1>Resumen de Consumo Energético</h1>
+</header>
+
+<section>
+    <p>El consumo total de energía es de {{ energy }} kWh.</p>
+
+    <!-- Muestra el gráfico generado por Matplotlib -->
+    <img src="{{ chart_url }}" alt="Gráfico de Consumo Energético">
+
+    <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
+    <a href="/" class="button">Inicio</a>
+</section>
+
+<!-- NUEVO: Cálculo de Paneles Solares -->
+<section>
+    <h2>Cálculo de Paneles Solares</h2>
+    <p>Número de paneles necesarios: {{ paneles_necesarios | round(2) }}</p>
+    <p>Área total requerida para los paneles: {{ area_total | round(2) }} m²</p>
+    <p>Área disponible: {{ area_disponible }} m²</p>
+
+    {% if area_disponible >= area_total %}
+    <p>Tienes suficiente espacio para instalar los paneles solares.</p>
+    {% else %}
+    <p>No tienes suficiente espacio para instalar todos los paneles necesarios.</p>
+    {% endif %}
+</section>
 </body>
 </html>
 
