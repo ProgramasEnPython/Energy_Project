@@ -29,24 +29,37 @@ html lang="es">
 
 
     <section class="intro">
-        <h2 class="provider-title">Noticias actualizadas sistemas solares fotovoltaicos en Colombia</h2><br>
-        <ul>
-            <li class="provider">
-                <h3>
-                    <a href="https://www.minenergia.gov.co/es/sala-de-prensa/noticias-index/colombia-busca-liderar-la-transici%C3%B3n-hacia-las-energ%C3%ADas-limpias-en-latinoam%C3%A9rica/"
-                       target="_blank">Colombia busca liderar la transición energética en Latinoamérica</a></h3><br>
-                <p>El 16 de agosto de 2024, se lanzó en Bogotá el informe "Movilización de inversiones para
-                    energíaslimpias en Colombia", desarrollado por el Foro Económico Mundial en colaboración con el
-                    Ministerio de Minas y Energía, Ecopetrol y Marsh. Este documento destaca la necesidad de inversiones
-        </ul>
+        <h2 class="provider-title">Contáctenos</h2><br>
+        <section class="contact-section">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="comentarios">Comentarios:</label>
+                    <textarea id="comentarios" name="comentarios" rows="4" required></textarea>
+                </div>
+                <input type="submit" value="Enviar">
+            </form>
+        </section>
+    <a href="../templates/index.html" class="button">Volver al inicio</a>
     <section/>
  
-
+    
 </main>
 
 <footer>
     <div class="footer-container">
-        <p>&copy; 2024 Proveedores de Energías Renovables - Todos los derechos reservados</p>
+        <p>&copy; 2024 Potencia Solar - Todos los derechos reservados</p>
     </div>
 </footer>
 <script src="../static/proveedor.js"></script> <!-- Enlazar el JavaScript -->
