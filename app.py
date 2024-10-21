@@ -127,12 +127,23 @@ def calcular():
     """ Finalmente, se renderiza la plantilla resultados.html, pasando el consumo total de energía, la lista
         de datos de electrodomésticos y la URL del gráfico como parámetros. Esto permite que la plantilla 
         muestre los resultados al usuario."""
-    return render_template('resultados.html', total_energy=total_energy, appliance_data=appliance_data,
-                           chart_url=chart_url,
-                           paneles_necesarios=paneles_necesarios,
-                           area_total=area_total,
-                           area_disponible=area_disponible
-                           )
+    # Comparar área total con el área disponible
+    if area_total > area_disponible:
+        # Si el área disponible es menor, se muestra una advertencia al usuario
+        return render_template('resultados.html', total_energy=total_energy, appliance_data=appliance_data,
+                               chart_url=chart_url,
+                               paneles_necesarios=paneles_necesarios,
+                               area_total=area_total,
+                               area_disponible=area_disponible,
+                               area_insuficiente=True)  # Indica que el área es insuficiente
+    else:
+        # Si el área disponible es suficiente, se continúa normalmente
+        return render_template('resultados.html', total_energy=total_energy, appliance_data=appliance_data,
+                               chart_url=chart_url,
+                               paneles_necesarios=paneles_necesarios,
+                               area_total=area_total,
+                               area_disponible=area_disponible,
+                               area_insuficiente=False)  # No hay problema con el área
 
 
 @app.route('/contacto', methods=['POST'])
@@ -173,7 +184,7 @@ def calculate_energy(appliance, quantity):
 
 def send_email(to_email, appliance_data, total_energy, department, region):
     """Envía un correo electrónico con el resultado del consumo energético."""
-    from_email = "ponercorreo@gmail.com"
+    from_email = "correo@gmail.com"
     from_password = "ponercontraseña"
 
     # Crear el mensaje

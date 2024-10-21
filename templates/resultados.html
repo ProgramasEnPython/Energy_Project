@@ -18,9 +18,6 @@
 
     <!-- Muestra el gráfico generado por Matplotlib -->
     <img src="{{ chart_url }}" alt="Gráfico de Consumo Energético">
-
-    <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
-    <a href="/" class="button">Inicio</a>
 </section>
 
 <!-- NUEVO: Cálculo de Paneles Solares -->
@@ -30,11 +27,15 @@
     <p>Área total requerida para los paneles: {{ area_total | round(2) }} m²</p>
     <p>Área disponible: {{ area_disponible }} m²</p>
 
-    {% if area_disponible >= area_total %}
-    <p>Tienes suficiente espacio para instalar los paneles solares.</p>
+    {% if area_insuficiente %}  <!-- Usamos la variable area_insuficiente que viene desde el backend -->
+    <p style="color: red;">Advertencia: No tienes suficiente espacio para instalar todos los paneles necesarios.</p>
+    <p>Por favor, considera reducir el consumo energético o aumentar el área disponible.</p>
     {% else %}
-    <p>No tienes suficiente espacio para instalar todos los paneles necesarios.</p>
+    <p style="color: green;">Tienes suficiente espacio para instalar los paneles solares.</p>
     {% endif %}
+
+    <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
+    <a href="/" class="button">Inicio</a>
 </section>
 </body>
 </html>
