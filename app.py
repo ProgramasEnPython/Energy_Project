@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, url_for
+from flask import Flask, render_template, request, redirect, send_file, url_for
 import matplotlib.pyplot as plt
 import os
 import smtplib
@@ -7,9 +7,19 @@ from email.mime.multipart import MIMEMultipart
 import atexit
 import shutil
 import uuid
-from werkzeug.utils import secure_filename
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+# Configuración de Flask-Mail para Gmail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'correo@gmail.com'  # Cambia por nuestra dirección de correo
+app.config['MAIL_PASSWORD'] = 'contraseña'  # Cambia por nuestra contraseña
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 # Diccionario con consumo energético estimado en kWh por electrodoméstico por mes
 appliance_energy = {
@@ -123,6 +133,37 @@ def calcular():
                            area_total=area_total,
                            area_disponible=area_disponible
                            )
+
+
+@app.route('/contacto', methods=['POST'])
+def enviar_contacto():
+    # Obtener los datos del formulario
+    nombre = request.form['nombre']
+    correo = request.form['correo']
+    telefono = request.form['telefono']
+    comentarios = request.form['comentarios']
+
+    # Crear el mensaje de correo
+    msg = Message('Nuevo mensaje de contacto de Potencia Solar',
+                  sender='correo@gmail.com',  # Remitente (cambiar esto por nuestro correo)
+                  recipients=['destinatario@gmail.com'])  # Destinatario (debe ser otro correo)
+
+    # Cuerpo del mensaje
+    msg.body = f"""
+    Has recibido un nuevo mensaje de contacto:
+
+    Nombre: {nombre}
+    Correo: {correo}
+    Teléfono: {telefono}
+
+    Comentarios:
+    {comentarios}
+    """
+
+    # Enviar el correo
+    mail.send(msg)
+
+    return redirect(url_for('index'))  # Redirigir al inicio
 
 
 def calculate_energy(appliance, quantity):
