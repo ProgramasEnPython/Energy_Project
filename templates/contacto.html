@@ -1,4 +1,5 @@
-html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@ html lang="es">
     <section class="intro">
         <h2 class="provider-title">Contáctenos</h2><br>
         <section class="contact-section">
-            <form action="#" method="post">
+            <form action="{{ url_for('enviar_contacto') }}" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -50,11 +51,12 @@ html lang="es">
                 </div>
                 <input type="submit" value="Enviar">
             </form>
+
         </section>
-    <a href="../templates/index.html" class="button">Volver al inicio</a>
-    <section/>
- 
-    
+        <a href="../templates/index.html" class="button">Volver al inicio</a>
+    </section>
+
+
 </main>
 
 <footer>
