@@ -1,19 +1,14 @@
 
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://www.genpower.es/wp-content/uploads/2022/10/paneles-solares.png.webp') no-repeat center center fixed;
-    background-size: cover;
-    z-index: -1;
-    animation: animatedBackground 20s linear infinite;
-}
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: url('https://www.genpower.es/wp-content/uploads/2022/10/paneles-solares.png.webp') no-repeat center center fixed;
+        background-size: cover; /* Asegura que la imagen cubra todo el header */
+    }
 
 section {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 800px;
     padding: 20px;
     background-color: rgb(244, 250, 248);
     border-radius: 8px;
@@ -39,6 +34,83 @@ img {
     height: auto;
 }
 
+
+.solar-header {
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        position: relative;
+}
+    
+.solar-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+}
+    
+.header-container {
+        position: relative;
+        text-align: center;
+        z-index: 2;
+}
+ 
+
+
+/* Header */
+.solar-header {
+    background-position: center; /* Centrar la imagen */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+    position: relative; /* Para los efectos de capa */
+    height: 300px; /* Altura del header */
+    display: flex; /* Usar flexbox para alinear el contenido */
+    align-items: center; /* Centrar verticalmente el contenido */
+    justify-content: center; /* Centrar horizontalmente el contenido */
+    color: #fff; /* Color de texto blanco */
+}
+
+/* Superposición semitransparente para mejorar la legibilidad del texto */
+.solar-header::before {
+    content: "";
+    position: absolute; /* Posicionar en el fondo */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
+    z-index: 1; /* Colocar por debajo del texto */
+}
+
+.header-container {
+    position: relative; /* Para colocar el texto por encima de la superposición */
+    text-align: center; /* Centrar texto */
+    z-index: 2; /* Colocar por encima de la superposición */
+}
+
+.logo {
+    width: 100px; /* Ajusta el tamaño del logo */
+    margin-bottom: 1rem; /* Espacio debajo del logo */
+}
+
+h1 {
+    font-size: 3rem; /* Tamaño grande para el título */
+    margin: 0; /* Sin margen */
+}
+
+p {
+    font-size: 1.2rem; /* Tamaño de fuente para el subtítulo */
+    margin-bottom: 1rem; /* Espacio debajo del párrafo */
+}
+
+
+/* Estilos para los encabezados */
 h2 {
     font-size: 3rem; /* Tamaño de fuente grande */
     color: #4caf50; /* Color blanco para encabezados */
