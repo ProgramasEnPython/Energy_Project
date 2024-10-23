@@ -9,9 +9,17 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<header>
-    <h1>Resumen de Consumo Energético</h1>
-</header>
+    <header>
+        <header class="solar-header">
+            <div class="header-container">
+                <img src="https://st.depositphotos.com/1378583/4183/v/950/depositphotos_41834667-stock-illustration-solar-panel-logo.jpg"
+                     alt="Logo de Energías Renovables" class="logo"> <!-- Cambia la URL por la de tu logo -->
+                <h1>Potencia Solar</h1>
+                <p>Resultados consumo energético</p>
+            </div>
+        </header>
+    
+    </header>
 
 <section>
     <p>El consumo total de energía es de {{ energy }} kWh.</p>
@@ -37,6 +45,12 @@
     <a href="{{ url_for('proveedores') }}" class="button">Ver Proveedores de Paneles Solares</a>
     <a href="/" class="button">Inicio</a>
 </section>
+
+<footer>
+    <div class="footer-container">
+        <p>&copy; 2024 Resultados consumo energético y cálculo de paneles solares- Todos los derechos reservados</p>
+    </div>
+</footer>
 </body>
 </html>
 
