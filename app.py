@@ -8,6 +8,7 @@ import atexit
 import shutil
 import uuid
 from flask_mail import Mail, Message
+import math
 
 app = Flask(__name__)
 
@@ -133,7 +134,7 @@ def calcular():
     consumo_diario = total_energy / 30
 
     # Calcular el número de paneles necesarios
-    paneles_necesarios = consumo_diario / (potencia_panel * horas_exposicion * rendimiento)
+    paneles_necesarios = math.ceil(consumo_diario / (potencia_panel * horas_exposicion * rendimiento))
 
     # Calcular el área total necesaria para los paneles
     area_total = paneles_necesarios * area_panel
