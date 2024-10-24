@@ -73,6 +73,12 @@
                 <label for="area_disponible">Área disponible para paneles solares (m²):</label>
                 <input type="number" id="area_disponible" name="area_disponible" min="0" required>
             </div>
+            <div>
+                <h3>Seleccione el tipo de gráfico:</h3>
+                <input type="checkbox" name="chart_type[]" value="bar"> Barra<br>
+                <input type="checkbox" name="chart_type[]" value="line"> Línea<br>
+                <input type="checkbox" name="chart_type[]" value="pie"> Pastel<br>
+            </div>
             <button type="submit">Calcular</button>
         </form>
     </section>
