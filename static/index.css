@@ -261,9 +261,6 @@ main {
 /* Clase activa para el enlace seleccionado */
 .active {
     font-weight: bold; /* Resalta el enlace activo */
-<<<<<<< HEAD
-}
-=======
 }
 
 /* Estilo del botón flotante */
@@ -373,4 +370,3 @@ main {
 .chat-footer button:hover {
     background-color: #629e07;
 }
->>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c

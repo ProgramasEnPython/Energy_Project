@@ -24,9 +24,6 @@ document.getElementById("contact-button").addEventListener("click", function () 
     toggleMenu(); // Mostrar el menú si está oculto
     const contactButton = document.querySelector("nav #nav-menu .button:nth-child(6)"); // Selecciona el botón "Contáctenos"
     contactButton.click(); // Simula un clic en el botón "Contáctenos"
-<<<<<<< HEAD
-});
-=======
 });
 
 
@@ -64,4 +61,3 @@ document.getElementById("contact-button").addEventListener("click", function () 
             chatBody.appendChild(messageDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
         }
->>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
