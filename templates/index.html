@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POTENCIA SOLAR</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<<<<<<< HEAD
     <link rel="stylesheet" href="../static/index.css">
 </head>
 <body>
 <video autoplay muted loop class="background-video">
     <source src="../static/WhatsApp Video 2024-10-13 at 21.38.51.mp4" type="video/mp4">
+=======
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+<video autoplay muted loop class="background-video">
+    <source src="../static/7211105-uhd_3840_2160_30fps.mp4" type="video/mp4">
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 </video>
 <div class="background"></div>
 <div id="main-container">
@@ -94,6 +102,30 @@
 
         </section>
     </main>
+<<<<<<< HEAD
+=======
+
+     <!-- Botón flotante para abrir el chat -->
+    <button class="chat-button" onclick="toggleChat()">💬</button>
+
+    <!-- Ventana del chatbox -->
+    <div class="chat-popup" id="chat-popup">
+        <div class="chat-header">
+            <h2>Asistente Virtual</h2>
+            <button class="close-button" onclick="toggleChat()">✖</button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">
+                ¡Hola! ¿En qué puedo ayudarte hoy?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje aquí..." autocomplete="off">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
     <footer>
         <div class="footer-container">
             <p>&copy; 2024 Proveedores de Energías Renovables - Todos los derechos reservados</p>
@@ -130,6 +162,11 @@
 <script src="../static/index.js"></script>
 </body>
 </html>
+
+
+
+
+
 
 
 

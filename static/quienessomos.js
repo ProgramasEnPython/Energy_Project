@@ -1,4 +1,4 @@
-// script.js
+
 document.querySelectorAll('.provider').forEach(item => {
     item.addEventListener('click', event => {
         // Cambiar color del texto al hacer clic

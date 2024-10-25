@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Dashboard de Consumo Energético</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../static/consumo.css">
@@ -24,6 +25,28 @@
     <section class="calculator">
         <h2>Cálculo de Consumo Energético</h2>
 
+=======
+    <title>Consumo Energético</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='consumo.css') }}">
+</head>
+<body>
+<!-- Fondo animado y Header -->
+<div class="background"></div>
+<div id="main-container">
+    <header class="solar-header">
+        <div class="header-container">
+            <img src="https://st.depositphotos.com/1378583/4183/v/950/depositphotos_41834667-stock-illustration-solar-panel-logo.jpg"
+                 alt="Logo de Energías Renovables" class="logo">
+            <h1>Consumo Energético</h1>
+        </div>
+    </header>
+
+    <!-- Formulario de cálculo de consumo energético -->
+    <section class="calculator">
+        <h2>Calcular Consumo Energético</h2>
+
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
         <form method="POST" action="{{ url_for('calcular') }}">
             <div id="appliance-fields">
                 <div class="appliance-field">

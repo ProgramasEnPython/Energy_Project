@@ -1,27 +1,53 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, send_file, url_for
 import matplotlib.pyplot as plt
+=======
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import atexit
-import shutil
 import uuid
+<<<<<<< HEAD
 from flask_mail import Mail, Message
 import math
+=======
+import math
+import shutil
+import atexit
+import smtplib
+import matplotlib.pyplot as plt
+from flask import Flask, render_template, request, redirect, url_for, send_file, jsonify
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from flask_mail import Mail, Message
+from google.cloud import dialogflow_v2 as dialogflow
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 
 app = Flask(__name__)
 
 # Configuración de Flask-Mail para Gmail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
+<<<<<<< HEAD
 app.config['MAIL_USERNAME'] = 'inforpotenciasolar@gmail.com'  # Cambia por nuestra dirección de correo
 app.config['MAIL_PASSWORD'] = 'Potenciasolar2024'  # Cambia por nuestra contraseña
+=======
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
 
+<<<<<<< HEAD
+=======
+# Configura las credenciales de Dialogflow
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
+
+# Cliente de sesión Dialogflow
+session_client = dialogflow.SessionsClient()
+PROJECT_ID = "potenciasolar-vjpp"  # ID de proyecto
+
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 # Diccionario con consumo energético estimado en kWh por electrodoméstico por mes
 appliance_energy = {
     "refrigerador": 45,
@@ -51,6 +77,13 @@ contenido del archivo index.html como respuesta.
 def index():
     return render_template('index.html')
 
+<<<<<<< HEAD
+=======
+@app.route('/contacto.html')
+def contacto():
+    return render_template('contacto.html')
+
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 
 @app.route('/s_nosotros.html')
 def s_nosotros():
@@ -159,6 +192,40 @@ def calcular():
                                area_total=area_total,
                                area_disponible=area_disponible,
                                area_insuficiente=False)  # No hay problema con el área
+<<<<<<< HEAD
+
+
+@app.route('/contacto', methods=['POST'])
+def enviar_contacto():
+    # Obtener los datos del formulario
+    nombre = request.form['nombre']
+    correo = request.form['correo']
+    telefono = request.form['telefono']
+    comentarios = request.form['comentarios']
+
+    # Crear el mensaje de correo
+    msg = Message('Nuevo mensaje de contacto de Potencia Solar',
+                  sender='inforpotenciasolar@gmail.com',  # Remitente (cambiar esto por nuestro correo)
+                  recipients=['soportepotenciasolar@gmail.com'])  # Destinatario (debe ser otro correo)
+
+    # Cuerpo del mensaje
+    msg.body = f"""
+    Has recibido un nuevo mensaje de contacto:
+
+    Nombre: {nombre}
+    Correo: {correo}
+    Teléfono: {telefono}
+
+    Comentarios:
+    {comentarios}
+    """
+
+    # Enviar el correo
+    mail.send(msg)
+
+    return redirect(url_for('index'))  # Redirigir al inicio
+=======
+>>>>>>> d52d94d54f871a13081af0fd617c3b9e7a83fd0c
 
 
 @app.route('/contacto', methods=['POST'])
@@ -191,6 +258,25 @@ def enviar_contacto():
 
     return redirect(url_for('index'))  # Redirigir al inicio
 
+# Ruta para manejar mensajes del chatbox con Dialogflow
+# Toma el mensaje del usuario, lo envía a Dialogflow para su procesamiento y devuelve la respuesta del bot
+# al frontend para que el usuario pueda verla.
+@app.route("/send_message", methods=["POST"])
+def send_message():
+    user_message = request.json.get("message")
+    session = session_client.session_path(PROJECT_ID, "session-id-1234")
+
+    # Preparar la consulta a Dialogflow
+    text_input = dialogflow.TextInput(text=user_message, language_code="es")
+    query_input = dialogflow.QueryInput(text=text_input)
+
+    response = session_client.detect_intent(
+        request={"session": session, "query_input": query_input}
+    )
+
+    # Extraer la respuesta del bot
+    bot_response = response.query_result.fulfillment_text
+    return jsonify({"response": bot_response})
 
 def calculate_energy(appliance, quantity):
     """Calcula el consumo energético en kWh basado en el electrodoméstico y su cantidad."""
