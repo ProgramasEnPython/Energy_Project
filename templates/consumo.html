@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Consumo Energético</title>
+    <title>Consumo Energético</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../static/consumo.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='consumo.css') }}">
 </head>
 <body>
 <!-- Fondo animado y Header -->
-<div class="background"></div> <!-- Fondo animado -->
-<div id="main-container"> <!-- Contenedor principal -->
-
+<div class="background"></div>
+<div id="main-container">
     <header class="solar-header">
         <div class="header-container">
             <img src="https://st.depositphotos.com/1378583/4183/v/950/depositphotos_41834667-stock-illustration-solar-panel-logo.jpg"

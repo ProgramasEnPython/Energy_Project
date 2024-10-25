@@ -1,26 +1,34 @@
-from flask import Flask, render_template, request, redirect, send_file, url_for
-import matplotlib.pyplot as plt
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import atexit
-import shutil
 import uuid
-from flask_mail import Mail, Message
 import math
+import shutil
+import atexit
+import smtplib
+import matplotlib.pyplot as plt
+from flask import Flask, render_template, request, redirect, url_for, send_file, jsonify
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from flask_mail import Mail, Message
+from google.cloud import dialogflow_v2 as dialogflow
 
 app = Flask(__name__)
 
 # Configuración de Flask-Mail para Gmail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'inforpotenciasolar@gmail.com'  # Cambia por nuestra dirección de correo
-app.config['MAIL_PASSWORD'] = 'Potenciasolar2024'  # Cambia por nuestra contraseña
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
+
+# Configura las credenciales de Dialogflow
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
+
+# Cliente de sesión Dialogflow
+session_client = dialogflow.SessionsClient()
+PROJECT_ID = "potenciasolar-vjpp"  # ID de proyecto
 
 # Diccionario con consumo energético estimado en kWh por electrodoméstico por mes
 appliance_energy = {
@@ -195,6 +203,25 @@ def enviar_contacto():
 
     return redirect(url_for('index'))  # Redirigir al inicio
 
+# Ruta para manejar mensajes del chatbox con Dialogflow
+# Toma el mensaje del usuario, lo envía a Dialogflow para su procesamiento y devuelve la respuesta del bot
+# al frontend para que el usuario pueda verla.
+@app.route("/send_message", methods=["POST"])
+def send_message():
+    user_message = request.json.get("message")
+    session = session_client.session_path(PROJECT_ID, "session-id-1234")
+
+    # Preparar la consulta a Dialogflow
+    text_input = dialogflow.TextInput(text=user_message, language_code="es")
+    query_input = dialogflow.QueryInput(text=text_input)
+
+    response = session_client.detect_intent(
+        request={"session": session, "query_input": query_input}
+    )
+
+    # Extraer la respuesta del bot
+    bot_response = response.query_result.fulfillment_text
+    return jsonify({"response": bot_response})
 
 def calculate_energy(appliance, quantity):
     """Calcula el consumo energético en kWh basado en el electrodoméstico y su cantidad."""
