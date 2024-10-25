@@ -24,8 +24,7 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 # Configura las credenciales de Dialogflow
-credentials_path = os.getenv("DIALOGFLOW_CREDENTIALS_PATH")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
 
 # Cliente de sesión Dialogflow
 session_client = dialogflow.SessionsClient()
