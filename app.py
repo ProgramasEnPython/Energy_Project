@@ -200,6 +200,35 @@ def enviar_calculos(email, appliance_data, total_energy, department, region, con
 
     mail.send(msg)
 
+@app.route('/resultados', methods=['POST'])
+def enviar_contacto():
+    # Obtener los datos del formulario
+    nombre = request.form['nombre']
+    correo = request.form['correo']
+    telefono = request.form['telefono']
+    comentarios = request.form['comentarios']
+
+    # Crear el mensaje de correo
+    msg = Message('Nuevo mensaje de contacto de Potencia Solar',
+                  sender='soportepotenciasolar@gmail.com',  # Remitente (cambiar esto por nuestro correo)
+                  recipients=['inforpotenciasolar@gmail.com'])  # Destinatario (debe ser otro correo)
+
+    # Cuerpo del mensaje
+    msg.body = f"""
+    Has recibido un nuevo mensaje de contacto:
+
+    Nombre: {nombre}
+    Correo: {correo}
+    Teléfono: {telefono}
+
+    Comentarios:
+    {comentarios}
+    """
+
+    # Enviar el correo
+    mail.send(msg)
+
+    return redirect(url_for('index'))  # Redirigir al inicio
 
 # Ruta para manejar mensajes del chatbox con Dialogflow
 # Toma el mensaje del usuario, lo envía a Dialogflow para su procesamiento y devuelve la respuesta del bot
