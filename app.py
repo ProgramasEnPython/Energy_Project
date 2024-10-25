@@ -16,8 +16,8 @@ app = Flask(__name__)
 # Configuración de Flask-Mail para Gmail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = 'soportepotenciasolar@gmail.com'  # Cambia por nuestra dirección de correo
+app.config['MAIL_PASSWORD'] = 'vkbu luds qitj vhtz'  # Cambia por nuestra contraseña
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
@@ -132,9 +132,6 @@ def calcular():
 
     chart_urls = [url_for('output_file', filename=filename) for filename in chart_filenames]
 
-    send_email(email, appliance_data, total_energy, department,
-               region)  # Se llama a la función send_email() para enviar un correo electrónico con los resultados del consumo energético y la información adicional.
-
     #    Cálculo de paneles solares
     # Parámetros para los paneles solares
     potencia_panel = 0.550  # Potencia en kW (550 W)
@@ -151,9 +148,14 @@ def calcular():
     # Calcular el área total necesaria para los paneles
     area_total = paneles_necesarios * area_panel
 
+
+    enviar_calculos(email, appliance_data, total_energy, department, region, consumo_diario, paneles_necesarios, area_total, chart_urls)
+
     """ Finalmente, se renderiza la plantilla resultados.html, pasando el consumo total de energía, la lista
         de datos de electrodomésticos y la URL del gráfico como parámetros. Esto permite que la plantilla 
         muestre los resultados al usuario."""
+        
+    
     # Comparar área total con el área disponible
     if area_total > area_disponible:
         # Si el área disponible es menor, se muestra una advertencia al usuario
@@ -173,35 +175,31 @@ def calcular():
                                area_insuficiente=False)  # No hay problema con el área
 
 
-@app.route('/contacto', methods=['POST'])
-def enviar_contacto():
-    # Obtener los datos del formulario
-    nombre = request.form['nombre']
-    correo = request.form['correo']
-    telefono = request.form['telefono']
-    comentarios = request.form['comentarios']
-
-    # Crear el mensaje de correo
-    msg = Message('Nuevo mensaje de contacto de Potencia Solar',
-                  sender='inforpotenciasolar@gmail.com',  # Remitente (cambiar esto por nuestro correo)
-                  recipients=['soportepotenciasolar@gmail.com'])  # Destinatario (debe ser otro correo)
-
+def enviar_calculos(email, appliance_data, total_energy, department, region, consumo_diario, paneles_necesarios, area_total, chart_urls):
+    """Función para enviar el correo con los resultados."""
+    msg = Message(
+        'Resultados del Cálculo Energético',
+        sender='soportepotenciasolar@gmail.com',
+        recipients=[email]
+    )
     # Cuerpo del mensaje
     msg.body = f"""
-    Has recibido un nuevo mensaje de contacto:
+    Resultados del cálculo de consumo energético:
 
-    Nombre: {nombre}
-    Correo: {correo}
-    Teléfono: {telefono}
+    Departamento: {department}
+    Región: {region}
+    Consumo Total de Energía: {total_energy} kWh
 
-    Comentarios:
-    {comentarios}
+    Electrodomésticos:
+    {''.join(f'- {appliance}: {energy} kWh\n' for appliance, energy in appliance_data)}
+
+    Consumo diario: {consumo_diario}
+    Paneles necesarios: {paneles_necesarios}
+    Area necesaria para instalación: {area_total}
     """
 
-    # Enviar el correo
     mail.send(msg)
 
-    return redirect(url_for('index'))  # Redirigir al inicio
 
 # Ruta para manejar mensajes del chatbox con Dialogflow
 # Toma el mensaje del usuario, lo envía a Dialogflow para su procesamiento y devuelve la respuesta del bot
@@ -226,42 +224,6 @@ def send_message():
 def calculate_energy(appliance, quantity):
     """Calcula el consumo energético en kWh basado en el electrodoméstico y su cantidad."""
     return appliance_energy.get(appliance, 0) * quantity
-
-
-def send_email(to_email, appliance_data, total_energy, department, region):
-    """Envía un correo electrónico con el resultado del consumo energético."""
-    from_email = "inforpotenciasolar@gmail.com"
-    from_password = "Potenciasolar2024"
-
-    # Crear el mensaje
-    msg = MIMEMultipart()
-    msg['From'] = from_email
-    msg['To'] = to_email
-    msg['Subject'] = 'Consumo Energético'
-
-    body = f'El consumo total de energía es de {total_energy} kWh.\n\n'
-    body += f'Departamento: {department}\nRegión: {region}\n\n'
-    body += 'Detalles por electrodoméstico:\n'
-
-    for appliance, energy in appliance_data:
-        body += f'{appliance}: {energy} kWh\n'
-
-    msg.attach(MIMEText(body, 'plain'))
-
-    try:
-        # Crea una instancia del objeto SMTP que se conecta al servidor SMTP de Gmail en el puerto 587,
-        # que es el puerto utilizado para la comunicación segura a través de TLS (Transport Layer Security)
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        # Inicia la conexión segura utilizando el protocolo TLS. Esto cifra la comunicación entre el cliente y el servidor
-        server.starttls()
-        # Inicia sesión en el servidor SMTP utilizando las credenciales proporcionadas
-        server.login(from_email, from_password)
-        server.sendmail(from_email, to_email, msg.as_string())
-        # Cierra la conexión con el servidor SMTP.
-        server.quit()
-        print("Correo enviado exitosamente!")
-    except Exception as e:
-        print(f"Error al enviar el correo: {e}")
 
 
 """
