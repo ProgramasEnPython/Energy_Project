@@ -51,6 +51,10 @@ contenido del archivo index.html como respuesta.
 def index():
     return render_template('index.html')
 
+@app.route('/contacto.html')
+def contacto():
+    return render_template('contacto.html')
+
 
 @app.route('/s_nosotros.html')
 def s_nosotros():
