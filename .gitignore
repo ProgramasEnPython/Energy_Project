@@ -1,2 +1,4 @@
 path/to/credentials.json
 credentials.json
+.venv/
+.vscode/

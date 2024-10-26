@@ -1,13 +1,12 @@
+#Leer README.md
+
 import os
 import uuid
 import math
 import shutil
 import atexit
-import smtplib
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, redirect, url_for, send_file, jsonify
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from flask_mail import Mail, Message
 from google.cloud import dialogflow_v2 as dialogflow
 
@@ -16,8 +15,8 @@ app = Flask(__name__)
 # Configuración de Flask-Mail para Gmail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'soportepotenciasolar@gmail.com'  # Cambia por nuestra dirección de correo
-app.config['MAIL_PASSWORD'] = 'vkbu luds qitj vhtz'  # Cambia por nuestra contraseña
+app.config['MAIL_USERNAME'] = 'soportepotenciasolar@gmail.com'  # Dirección de correo de envío
+app.config['MAIL_PASSWORD'] = 'vkbu luds qitj vhtz'  # Contraseña de aplicaciones
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 

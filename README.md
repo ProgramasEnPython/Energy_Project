@@ -12,10 +12,6 @@ Este proyecto permite calcular el consumo energético de diferentes electrodomé
 
 ## 🚀 Instalación
 
-Clona el repositorio:
-   
-   git clone https://github.com/usuario/nombre-del-proyecto.git
-
 Ejecuta en la consola de comandos:
 
 pip install Flask
